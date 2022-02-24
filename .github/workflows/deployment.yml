@@ -1,0 +1,24 @@
+name: Deployment
+
+on: push
+
+jobs:
+  staging:
+    runs-on: ubuntu-latest
+    environment: 
+      name: staging
+      url: https://github.com
+    steps:
+      - name: deploy
+        run: |
+          echo "hello world"
+  production:
+    runs-on: ubuntu-latest
+    environment: 
+      name: production
+      url: https://github.com
+    steps:
+      - name: deploy
+        run: |
+          echo "hello world"
+
