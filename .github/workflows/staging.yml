@@ -10,4 +10,5 @@ jobs:
       url: https://github.com
   steps:
     - name: deploy
-      run: echo "hello world"
+      run: |
+        echo "hello world"
