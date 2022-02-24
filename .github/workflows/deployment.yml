@@ -1,6 +1,12 @@
 name: Deployment
 
-on: push
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - .github/workflows/deployment.yml
 
 jobs:
   staging:
@@ -13,6 +19,7 @@ jobs:
         run: |
           echo "hello world"
   production:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment: 
       name: production
