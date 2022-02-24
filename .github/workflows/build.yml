@@ -1,0 +1,17 @@
+name: Build
+
+on:
+  workflow_call:
+    outputs:
+      uuid:
+        value: ${{ jobs.build.outputs.uuid }}
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    outputs:
+      uuid: ${{ steps.uuidgen.outputs.uuid }}
+    steps:
+      - id: uuidgen
+        run: echo "::set-output name=uuid::$(uuidgen)"

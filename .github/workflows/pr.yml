@@ -8,11 +8,10 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: deploy
-        run: |
-          echo "I am building"
+    uses: ./.github/workflows/build.yml
   deploy:
     name: Deploy
     uses: ./.github/workflows/staging.yml
+    with:
+      environment: staging
+      uuid: ${{ needs.build.outputs.uuid }}
