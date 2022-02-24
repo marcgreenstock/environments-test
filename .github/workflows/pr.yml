@@ -1,0 +1,18 @@
+name: Pull Request
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy
+        run: |
+          echo "I am building"
+  deploy:
+    name: Deploy
+    uses: ./.github/workflows/staging
