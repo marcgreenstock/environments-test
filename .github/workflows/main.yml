@@ -1,7 +1,9 @@
-name: Pull Request
+name: Main
 
 on:
-  pull_request:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -12,5 +14,5 @@ jobs:
     uses: ./.github/workflows/deploy.yml
     needs: build
     with:
-      environment: staging
+      environment: production
       uuid: ${{ needs.build.outputs.uuid }}
