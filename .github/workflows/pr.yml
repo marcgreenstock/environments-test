@@ -15,4 +15,4 @@ jobs:
           echo "I am building"
   deploy:
     name: Deploy
-    uses: ./.github/workflows/staging
+    uses: ./.github/workflows/staging.yml
