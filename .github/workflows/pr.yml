@@ -11,7 +11,7 @@ jobs:
     uses: ./.github/workflows/build.yml
   deploy:
     name: Deploy
-    uses: ./.github/workflows/staging.yml
+    uses: ./.github/workflows/deploy.yml
     with:
       environment: staging
       uuid: ${{ needs.build.outputs.uuid }}
