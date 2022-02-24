@@ -1,6 +1,12 @@
 name: Deployment
 
-on: push
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - .github/workflows/deployment.yml
 
 jobs:
   staging:
