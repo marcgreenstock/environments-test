@@ -3,7 +3,7 @@ name: Deploy
 on:
   workflow_call:
     inputs:
-      dest: 
+      environment: 
         required: true
         type: string
       sha:
@@ -13,7 +13,8 @@ on:
 jobs:
   deployment:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
     steps:
       - name: Deploy
         run: |
-          echo "Deploying to ${{ inputs.dest }} with ${{ inputs.sha }} "
+          echo "Deploying to ${{ inputs.environment }} with ${{ inputs.sha }} "
