@@ -1,4 +1,4 @@
-name: Deploy
+name: Release
 
 on:
   workflow_call:
@@ -11,10 +11,10 @@ on:
         type: string
 
 jobs:
-  deployment:
+  release:
+    name: Release
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     steps:
-      - name: Deploy
-        run: |
+      - run: |
           echo "Deploying to ${{ inputs.environment }} with ${{ inputs.sha }} "
