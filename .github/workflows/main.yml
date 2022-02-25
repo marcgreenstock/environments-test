@@ -9,42 +9,37 @@ jobs:
   build:
     uses: ./.github/workflows/build.yml
   env1:
+    environment: env1
     needs: build
     uses: ./.github/workflows/deploy.yml
-    environment:
-      name: env1
     with:
       dest: env1
       sha: ${{ github.sha }}
   env2:
+    environment: env2
     needs: build
     uses: ./.github/workflows/deploy.yml
-    environment:
-      name: env2
     with:
       dest: env2
       sha: ${{ github.sha }}
   env3:
+    environment: env3
     needs: build
     uses: ./.github/workflows/deploy.yml
-    environment:
-      name: env3
     with:
       dest: env3
       sha: ${{ github.sha }}
   env4:
+    environment: env4
     needs: build
     uses: ./.github/workflows/deploy.yml
-    environment:
-      name: env4
     with:
       dest: env4
       sha: ${{ github.sha }}
   env5:
+    environment: env5
     needs: build
     uses: ./.github/workflows/deploy.yml
-    environment:
-      name: env5
     with:
       dest: env5
       sha: ${{ github.sha }}
