@@ -4,26 +4,23 @@ on:
   workflow_call:
 
 jobs:
-  install:
-    name: Install
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo "Installing"
   build:
     name: Build
+    needs: install
     runs-on: ubuntu-latest
     steps:
       - run: |
           echo "Building"
   test:
     name: Test
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - run: |
           echo "Testing"
   push:
     name: Push
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - run: |
