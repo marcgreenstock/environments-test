@@ -2,19 +2,11 @@ name: Build
 
 on:
   workflow_call:
-    outputs:
-      uuid:
-        description: Random UUID
-        value: ${{ jobs.build.outputs.uuid }}
 
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    outputs:
-      uuid: ${{ steps.uuid.outputs.uuid }}
     steps:
-      - id: uuid
-        name: Generate UUID
-        run: |
-          echo "::set-output name=uuid::$(uuidgen)"
+      - run: |
+        echo "Building"

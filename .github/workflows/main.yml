@@ -7,12 +7,44 @@ on:
 
 jobs:
   build:
-    name: Build
     uses: ./.github/workflows/build.yml
-  deploy:
-    name: Deploy
-    uses: ./.github/workflows/deploy.yml
+  env1:
     needs: build
+    uses: ./.github/workflows/deploy.yml
+    environment:
+      name: env1
     with:
-      environment: production
-      uuid: ${{ needs.build.outputs.uuid }}
+      dest: env1
+      sha: ${{ github.sha }}
+  env2:
+    needs: build
+    uses: ./.github/workflows/deploy.yml
+    environment:
+      name: env2
+    with:
+      dest: env2
+      sha: ${{ github.sha }}
+  env3:
+    needs: build
+    uses: ./.github/workflows/deploy.yml
+    environment:
+      name: env3
+    with:
+      dest: env3
+      sha: ${{ github.sha }}
+  env4:
+    needs: build
+    uses: ./.github/workflows/deploy.yml
+    environment:
+      name: env4
+    with:
+      dest: env4
+      sha: ${{ github.sha }}
+  env5:
+    needs: build
+    uses: ./.github/workflows/deploy.yml
+    environment:
+      name: env5
+    with:
+      dest: env5
+      sha: ${{ github.sha }}

@@ -3,20 +3,17 @@ name: Deploy
 on:
   workflow_call:
     inputs:
-      environment:
+      dest: 
         required: true
         type: string
-      uuid:
+      sha:
         required: true
         type: string
 
 jobs:
   deployment:
-    name: ${{ inputs.environment }}
     runs-on: ubuntu-latest
-    environment: 
-      name: ${{ inputs.environment }}
     steps:
-      - name: deploy
+      - name: Deploy
         run: |
-          echo "UUID: ${{ inputs.uuid }}"
+          echo "Deploying to ${{ inputs.dest }} with ${{ inputs.sha }} "
