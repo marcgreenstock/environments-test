@@ -14,15 +14,14 @@ jobs:
   push:
     name: Push
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
     steps:
       - run: |
           echo "Pushing image to ${{ inputs.environment }} with ${{ inputs.sha }} "
-  deploy:
-    name: Deploy
+  tag:
+    name: Tag Image with production
     needs: push
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     steps:
       - run: |
-          echo "Deploying to ${{ inputs.environment }} with ${{ inputs.sha }} "
+          echo "Taging image ${{ inputs.environment }} with ${{ inputs.sha }} "
