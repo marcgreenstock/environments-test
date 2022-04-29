@@ -11,8 +11,15 @@ on:
         type: string
 
 jobs:
-  release:
-    name: Release
+  push:
+    name: Push
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+      - run: |
+          echo "Pushing image to ${{ inputs.environment }} with ${{ inputs.sha }} "
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     steps:
