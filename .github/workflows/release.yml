@@ -20,6 +20,7 @@ jobs:
           echo "Pushing image to ${{ inputs.environment }} with ${{ inputs.sha }} "
   deploy:
     name: Deploy
+    needs: push
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     steps:
