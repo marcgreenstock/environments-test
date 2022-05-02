@@ -9,33 +9,39 @@ jobs:
   build:
     name: Build
     uses: ./.github/workflows/build.yml
+  deploy:
   env1:
     environment: env1
     needs: build
-    uses: ./.github/workflows/release.yml
-    with:
-      region: region-1
+    steps:
+      - uses: ./.github/workflows/release.yml
+        with:
+          region: region-1
   env2:
     environment: env2
     needs: build
-    uses: ./.github/workflows/release.yml
-    with:
-      region: region-2
+    steps:
+      - uses: ./.github/workflows/release.yml
+        with:
+          region: region-2
   env3:
     environment: env3
     needs: build
-    uses: ./.github/workflows/release.yml
-    with:
-      region: region-3
+    steps:
+      - uses: ./.github/workflows/release.yml
+        with:
+          region: region-3
   env4:
     environment: env4
     needs: build
-    uses: ./.github/workflows/release.yml
-    with:
-      region: region-4
+    steps:
+      - uses: ./.github/workflows/release.yml
+        with:
+        region: region-4
   env5:
     environment: env5
     needs: build
-    uses: ./.github/workflows/release.yml
-    with:
-      region: region-5
+    steps:
+      - uses: ./.github/workflows/release.yml
+        with:
+          region: region-5
