@@ -12,6 +12,8 @@ jobs:
     name: Push
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout project
+        uses: actions/checkout@v2
       - run: |
           echo "Pushing image to ${{ inputs.region }} with ${{ github.sha }} "
   tag:
@@ -19,5 +21,7 @@ jobs:
     needs: push
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout project
+        uses: actions/checkout@v2
       - run: |
           echo "Taging image ${{ inputs.region }} with ${{ github.sha }} "
