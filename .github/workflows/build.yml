@@ -12,7 +12,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     outputs:
-      artifact_name: ${{ steps.upload.artifact_name }}
+      artifact_name: ${{ steps.upload.outputs.artifact_name }}
     steps:
       - name: Checkout project
         uses: actions/checkout@v2
