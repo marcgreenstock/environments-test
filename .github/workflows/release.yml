@@ -6,9 +6,6 @@ on:
       region: 
         required: true
         type: string
-      artifact_name: 
-        required: true
-        type: string
 
 jobs:
   push:
@@ -18,10 +15,10 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ishworkh/docker-image-artifact-download@v1
         with:
-          image: ${{ inputs.artifact_name }}
+          image: "image:${{ github.sha }}"
       - name: Push image
         run: |
-          echo "Pushing ${{ inputs.artifact_name }}"
+          echo "Pushing image"
       - name: Tag image
         run: |
-          echo "Taging ${{ inputs.artifact_name }}"
+          echo "Taging image"

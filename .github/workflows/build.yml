@@ -2,17 +2,11 @@ name: Build
 
 on:
   workflow_call:
-    outputs:
-      artifact_name: 
-        description: Image artifact name
-        value: ${{ jobs.build.outputs.artifact_name }}
 
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    outputs:
-      artifact_name: ${{ steps.upload.outputs.artifact_name }}
     steps:
       - name: Checkout project
         uses: actions/checkout@v2
@@ -24,3 +18,4 @@ jobs:
         uses: ishworkh/docker-image-artifact-upload@v1
         with:
           image: "image:${{ github.sha }}"
+        
