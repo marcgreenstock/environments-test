@@ -2,6 +2,8 @@ name: Build
 
 on:
   workflow_call:
+    outputs:
+      artifact_name: ${{ jobs.build.outputs.artifact_name }}
 
 jobs:
   build:
