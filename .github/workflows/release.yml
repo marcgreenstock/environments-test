@@ -3,10 +3,7 @@ name: Release
 on:
   workflow_call:
     inputs:
-      environment: 
-        required: true
-        type: string
-      sha:
+      region: 
         required: true
         type: string
 
@@ -16,12 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "Pushing image to ${{ inputs.environment }} with ${{ inputs.sha }} "
+          echo "Pushing image to ${{ inputs.region }} with ${{ github.sha }} "
   tag:
     name: Tag Image with production
     needs: push
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
     steps:
       - run: |
-          echo "Taging image ${{ inputs.environment }} with ${{ inputs.sha }} "
+          echo "Taging image ${{ inputs.region }} with ${{ github.sha }} "
