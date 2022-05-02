@@ -9,7 +9,6 @@ jobs:
   build:
     name: Build
     uses: ./.github/workflows/build.yml
-  deploy:
   env1:
     environment: env1
     needs: build
