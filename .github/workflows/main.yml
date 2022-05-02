@@ -11,33 +11,12 @@ jobs:
     uses: ./.github/workflows/build.yml
     with:
       sha: ${{ github.sha }}
-  env1:
+  deploy:
+    strategy:
+      matrix:
+        environment: [env1, env2, env3, env4, env5]
     needs: build
     uses: ./.github/workflows/release.yml
     with:
-      environment: env1
-      sha: ${{ github.sha }}
-  env2:
-    needs: build
-    uses: ./.github/workflows/release.yml
-    with:
-      environment: env2
-      sha: ${{ github.sha }}
-  env3:
-    needs: build
-    uses: ./.github/workflows/release.yml
-    with:
-      environment: env3
-      sha: ${{ github.sha }}
-  env4:
-    needs: build
-    uses: ./.github/workflows/release.yml
-    with:
-      environment: env4
-      sha: ${{ github.sha }}
-  env5:
-    needs: build
-    uses: ./.github/workflows/release.yml
-    with:
-      environment: env5
+      environment: ${{ matrix.environment }}
       sha: ${{ github.sha }}
