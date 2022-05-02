@@ -3,7 +3,9 @@ name: Build
 on:
   workflow_call:
     outputs:
-      artifact_name: ${{ jobs.build.outputs.artifact_name }}
+      artifact_name: 
+        description: Image artifact name
+        value: ${{ jobs.build.outputs.artifact_name }}
 
 jobs:
   build:
