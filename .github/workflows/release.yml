@@ -6,18 +6,22 @@ on:
       region: 
         required: true
         type: string
+      artifact_name: 
+        required: true
+        type: string
 
 jobs:
   push:
-    name: Push
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "Pushing image to ${{ inputs.region }} with ${{ github.sha }} "
-  tag:
-    name: Tag Image with production
-    needs: push
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo "Taging image ${{ inputs.region }} with ${{ github.sha }} "
+      - uses: actions/checkout@v2
+      - uses: ishworkh/docker-image-artifact-download@v1
+        with:
+          image: ${{ inputs.artifact_name }}
+      - name: Push image
+        run: |
+          echo "Pushing ${{ inputs.artifact_name }}"
+      - name: Tag image
+        run: |
+          echo "Taging ${{ inputs.artifact_name }}"

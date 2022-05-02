@@ -7,13 +7,16 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    outputs:
+      artifact_name: ${{ steps.upload.artifact_name }}
     steps:
       - name: Checkout project
         uses: actions/checkout@v2
       - name: Build image
         run: |
           docker build -t image:${{ github.sha }} .
-      - name: Upload image
+      - id: upload
+        name: Upload image
         uses: ishworkh/docker-image-artifact-upload@v1
         with:
           image: "image:${{ github.sha }}"
