@@ -10,11 +10,15 @@ jobs:
     name: Build
     uses: ./.github/workflows/build.yml
   env1:
-    environment: env1
     needs: build
     uses: ./.github/workflows/release.yml
     with:
       region: region-1
+  env2:
+    needs: build
+    uses: ./.github/workflows/release.yml
+    with:
+      region: region-2
   # env2:
   #   environment: env2
   #   needs: build
