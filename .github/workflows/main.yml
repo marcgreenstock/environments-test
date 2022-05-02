@@ -12,11 +12,15 @@ jobs:
     with:
       sha: ${{ github.sha }}
   deploy:
+    needs: build
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         environment: [env1, env2, env3, env4, env5]
-    needs: build
-    uses: ./.github/workflows/release.yml
-    with:
-      environment: ${{ matrix.environment }}
-      sha: ${{ github.sha }}
+    steps:
+      - name: push
+        run: |
+          echo "Pushing image to ${{ inputs.environment }} with ${{ inputs.sha }} "
+      - name: tag
+        run: |
+          echo "Taging image ${{ inputs.environment }} with ${{ inputs.sha }} "
