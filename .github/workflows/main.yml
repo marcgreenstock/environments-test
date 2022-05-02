@@ -13,8 +13,8 @@ jobs:
     environment: env1
     needs: build
     uses: ./.github/workflows/release.yml
-      with:
-        region: region-1
+    with:
+      region: region-1
   # env2:
   #   environment: env2
   #   needs: build
