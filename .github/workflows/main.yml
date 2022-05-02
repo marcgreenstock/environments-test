@@ -40,7 +40,7 @@ jobs:
     steps:
       - uses: ./.github/workflows/release.yml
         with:
-        region: region-4
+          region: region-4
   env5:
     environment: env5
     needs: build
