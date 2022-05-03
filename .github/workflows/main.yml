@@ -19,7 +19,13 @@ jobs:
     needs: build
     uses: ./.github/workflows/release.yml
     with:
-      environment: random
+      environment: env2
+      region: region-2
+  env3:
+    needs: build
+    uses: ./.github/workflows/release.yml
+    with:
+      environment: env3
       region: region-2
   # env2:
   #   environment: env2
