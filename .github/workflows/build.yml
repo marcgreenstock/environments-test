@@ -22,6 +22,7 @@ jobs:
           path: /tmp/image.tar
   push:
     name: Push
+    needs: build
     runs-on: ubuntu-latest
     strategy:
       matrix:
