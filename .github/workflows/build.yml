@@ -13,7 +13,7 @@ jobs:
         run: |
           docker build \
           -t test-image \
-          --output type=docker,dest=/tmp/image.tar \
+          -o type=local,dest=/tmp/image.tar \
           .
       - name: Upload image artifact
         uses: actions/upload-artifact@v2
