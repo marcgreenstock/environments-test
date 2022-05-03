@@ -9,6 +9,8 @@ jobs:
   build:
     name: Build
     uses: ./.github/workflows/build.yml
+    with:
+      environments: 'env1 env2'
   release:
     needs: build
     uses: ./.github/workflows/release.yml

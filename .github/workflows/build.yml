@@ -2,6 +2,10 @@ name: Build
 
 on:
   workflow_call:
+    inputs:
+      environments:
+        required: true
+        type: string
 
 jobs:
   image:
@@ -29,6 +33,7 @@ jobs:
     strategy:
       matrix:
         region: [env1, env2, env3]
+    if: contains(inputs.environments, matrix.region)
     steps:
       - name: Download image artifact
         uses: actions/download-artifact@v2
