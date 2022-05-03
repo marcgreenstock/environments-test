@@ -23,8 +23,9 @@ jobs:
   push:
     name: Push
     runs-on: ubuntu-latest
-    matrix:
-      region: [region-1, region-2, region-3]
+    strategy:
+      matrix:
+        region: [region-1, region-2, region-3]
     steps:
       - name: Download image artifact
         uses: actions/download-artifact@v2
