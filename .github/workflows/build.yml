@@ -4,8 +4,8 @@ on:
   workflow_call:
 
 jobs:
-  build:
-    name: Build
+  image:
+    name: Image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -24,11 +24,11 @@ jobs:
           path: /tmp/image.tar
   push:
     name: Push
-    needs: build
+    needs: image
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        region: [region-1, region-2, region-3]
+        region: [env1, env2, env3]
     steps:
       - name: Download image artifact
         uses: actions/download-artifact@v2

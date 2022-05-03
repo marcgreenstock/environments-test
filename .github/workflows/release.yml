@@ -2,19 +2,15 @@ name: Release
 
 on:
   workflow_call:
-    inputs:
-      region: 
-        required: true
-        type: string
-      environment:
-        required: false
-        type: string
 
 jobs:
-  production:
-    name: Production
+  tag:
+    name: Tag image
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
+    strategy:
+      matrix:
+        region: [env1, env2, env3]
+    environment: ${{ matrix.region }}
     steps:
       - name: Tag image
         run: |
