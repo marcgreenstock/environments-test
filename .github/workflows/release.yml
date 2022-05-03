@@ -6,11 +6,15 @@ on:
       region: 
         required: true
         type: string
+      environment:
+        required: false
+        type: string
 
 jobs:
   push:
     name: Deploy
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
     steps:
       - uses: actions/checkout@v2
       - uses: ishworkh/docker-image-artifact-download@v1
