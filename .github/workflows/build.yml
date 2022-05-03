@@ -8,14 +8,32 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout project
-        uses: actions/checkout@v2
-      - name: Build image
+      - uses: actions/checkout@v2
+      - name: Docker build
         run: |
-          docker build -t image:${{ github.sha }} .
-      - id: upload
-        name: Upload image
-        uses: ishworkh/docker-image-artifact-upload@v1
+          docker build \
+          -t test-image \
+          --output /tmp/image.tar \
+          .
+      - name: Upload image artifact
+        uses: actions/upload-artifact@v2
         with:
-          image: "image:${{ github.sha }}"
-        
+          name: image
+          path: /tmp/image.tar
+  push:
+    name: Push
+    runs-on: ubuntu-latest
+    matrix:
+      region: [region-1, region-2, region-3]
+    steps:
+      - name: Download image artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: image
+          path: /tmp
+      - name: Docker load
+        run: |
+          docker load --input /tmp/image.tar
+      - name: Docker image ls
+        run: |
+          docker image ls -a

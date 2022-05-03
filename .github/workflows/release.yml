@@ -11,18 +11,11 @@ on:
         type: string
 
 jobs:
-  push:
-    name: Deploy
+  production:
+    name: Production
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: ishworkh/docker-image-artifact-download@v1
-        with:
-          image: "image:${{ github.sha }}"
-      - name: Push image
-        run: |
-          echo "Pushing image"
       - name: Tag image
         run: |
           echo "Taging image"
