@@ -27,7 +27,7 @@ jobs:
           name: image
           path: /tmp/image.tar
   prep-matrix:
-    uses: './.github/actions/region-matrix'
+    uses: ./.github/actions/region-matrix
     with:
       regions: ${{ inputs.regions }}
   # prep-matrix:
