@@ -28,14 +28,17 @@ jobs:
           path: /tmp/image.tar
   prep-matrix:
     name: Prepare matrix
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-    steps:
-      - id: set-matrix
-        run: |
-          matrix=$(echo '${{ inputs.environments }}' | sed -r 's/ /\n/g' | jq -Rsc 'split("\n")[:-1]')
-          echo ::set-output name=matrix::$(echo $matrix)\"
+    uses: ./.github/workflows/matrix.yml
+    with:
+      environments: ${{ inputs.environments }}
+    # runs-on: ubuntu-latest
+    # outputs:
+    #   matrix: ${{ steps.set-matrix.outputs.matrix }}
+    # steps:
+    #   - id: set-matrix
+    #     run: |
+    #       matrix=$(echo '${{ inputs.environments }}' | sed -r 's/ /\n/g' | jq -Rsc 'split("\n")[:-1]')
+    #       echo ::set-output name=matrix::$(echo $matrix)\"
   push:
     name: Push
     needs: [ image, prep-matrix]
