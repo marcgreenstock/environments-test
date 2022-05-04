@@ -6,7 +6,7 @@ on:
       regions:
         description: Regions (separated by space)
         required: true
-        defaults: env1
+        default: env1
       sha:
         description: SHA to deploy
         required: true
