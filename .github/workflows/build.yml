@@ -12,6 +12,7 @@ on:
       tag:
         required: false
         default: ${{ inputs.sha }}
+        type: string
 
 jobs:
   image:
