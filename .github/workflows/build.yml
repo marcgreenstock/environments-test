@@ -32,6 +32,7 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.regions }}
     steps:
+      - uses: actions/checkout@v2
       - uses: ./.github/actions/region-matrix
         id: set-matrix
         with:
