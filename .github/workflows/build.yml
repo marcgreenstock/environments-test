@@ -39,23 +39,23 @@ jobs:
   #       id: set-matrix
   #       with:
   #         regions: ${{ inputs.regions }}
-  # prep-matrix:
-  #   name: Prepare matrix
-  #   runs-on: ubuntu-latest
-  #   outputs:
-  #     matrix: ${{ steps.set-matrix.outputs.matrix }}
-  #   steps:
-  #     - id: set-matrix
-  #       run: |
-  #         matrix=$(echo '${{ inputs.regions }}' | sed -r 's/ /\n/g' | jq -Rsc 'split("\n")[:-1]')
-  #         echo ::set-output name=matrix::$(echo $matrix)\"
+  prep-matrix:
+    name: Prepare matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - id: set-matrix
+        run: |
+          matrix=$(echo '${{ inputs.regions }}' | sed -r 's/ /\n/g' | jq -Rsc 'split("\n")[:-1]')
+          echo ::set-output name=matrix::$(echo $matrix)\"
   push:
     name: Push
-    needs: image
+    needs: [image, prep-matrix]
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        region: ${{ inputs.regions }}
+        region: ${{ needs.pre-matrix.outputs.matrix }}
     environment: ${{ matrix.region }}
     steps:
       - uses: actions/checkout@v2
@@ -78,4 +78,4 @@ jobs:
           docker image ls -a
       - name: Tag image
         run: |
-          echo ${{ steps.resolve-region.outputs.region }}
+          echo 'Tagging ${{ steps.resolve-region.outputs.region }}'
