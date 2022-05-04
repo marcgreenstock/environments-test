@@ -27,9 +27,13 @@ jobs:
           name: image
           path: /tmp/image.tar
   prep-matrix:
-    uses: ./.github/actions/region-matrix
-    with:
-      regions: ${{ inputs.regions }}
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.regions }}
+    steps:
+      - uses: ./.github/actions/region-matrix
+        id: set-matrix
+        with:
+          regions: ${{ inputs.regions }}
   # prep-matrix:
   #   name: Prepare matrix
   #   runs-on: ubuntu-latest
