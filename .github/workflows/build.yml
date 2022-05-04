@@ -26,14 +26,23 @@ jobs:
         with:
           name: image
           path: /tmp/image.tar
+  prep-matrix:
+    name: Prepare matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - id: set-matrix
+        run: |
+          matrix=$(echo '${{ inputs.environments }}' | sed -r 's/ /\n/g' | jq -Rsc 'split("\n")[:-1]')
+          echo ::set-output name=matrix::$(echo $matrix)\"
   push:
     name: Push
-    needs: image
+    needs: [ image, prep-matrix]
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        region: [env1, env2, env3]
-    if: contains(inputs.environments, matrix.region)
+        region: ${{ fromJson(needs.prep-matrix.outputs.matrix) }}
     steps:
       - name: Download image artifact
         uses: actions/download-artifact@v2
