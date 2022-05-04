@@ -56,7 +56,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        region: ${{ fromJSON(needs.pre-matrix.outputs.matrix) }}
+        region: ${{ fromJSON(needs.prep-matrix.outputs.matrix) }}
     environment: ${{ matrix.region }}
     steps:
       - uses: actions/checkout@v2
