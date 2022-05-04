@@ -26,19 +26,19 @@ jobs:
         with:
           name: image
           path: /tmp/image.tar
-  prep-matrix:
-    name: Prepare matrix
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.regions }}
-    steps:
-      - uses: actions/checkout@v2
-      - run: |
-          yarn install
-      - uses: ./.github/actions/region-matrix
-        id: set-matrix
-        with:
-          regions: ${{ inputs.regions }}
+  # prep-matrix:
+  #   name: Prepare matrix
+  #   runs-on: ubuntu-latest
+  #   outputs:
+  #     matrix: ${{ steps.set-matrix.outputs.regions }}
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - run: |
+  #         yarn install
+  #     - uses: ./.github/actions/region-matrix
+  #       id: set-matrix
+  #       with:
+  #         regions: ${{ inputs.regions }}
   # prep-matrix:
   #   name: Prepare matrix
   #   runs-on: ubuntu-latest
@@ -51,12 +51,20 @@ jobs:
   #         echo ::set-output name=matrix::$(echo $matrix)\"
   push:
     name: Push
-    needs: [ image, prep-matrix ]
+    needs: image
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        region: ${{ fromJson(needs.prep-matrix.outputs.matrix) }}
+        region: ${{ inputs.regions }}
+    environment: ${{ matrix.region }}
     steps:
+      - uses: actions/checkout@v2
+      - run: |
+        yarn installl
+      - id: resolve-region
+        uses: ./.github/actions/resolve-region
+        with:
+          region: ${{ matrix.region }}
       - name: Download image artifact
         uses: actions/download-artifact@v2
         with:
@@ -68,3 +76,6 @@ jobs:
       - name: Docker image ls
         run: |
           docker image ls -a
+      - name: Tag image
+        run: |
+          echo ${{ steps.resolve-region.outputs.region }}

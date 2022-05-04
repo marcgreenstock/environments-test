@@ -1,0 +1,12 @@
+name: Resolve Region
+description: Outputs the resolved region
+inputs:
+  region:
+    required: true
+    description: Input region
+outputs:
+  region:
+    description: Resolved region
+runs:
+  using: node16
+  main: index.js
