@@ -19,6 +19,6 @@ jobs:
     name: Build and Deploy
     uses: ./.github/workflows/build.yml
     with:
-      regions: ${{ github.events.inputs.regions }}
-      sha: ${{ github.events.inputs.sha }}
-      tag: ${{ github.events.inputs.tag }}
+      regions: ${{ github.event.inputs.regions }}
+      sha: ${{ github.event.inputs.sha }}
+      tag: ${{ github.event.inputs.tag }}
