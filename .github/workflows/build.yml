@@ -34,7 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          yarn global add @actions/core
+          yarn install
       - uses: ./.github/actions/region-matrix
         id: set-matrix
         with:
