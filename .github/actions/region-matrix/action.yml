@@ -1,0 +1,12 @@
+name: Map regions
+description: Maps regions
+inputs:
+  regions:
+    required: true
+    description: Regions as a space separated string
+outputs:
+  regions:
+    description: Regions as a json array
+runs:
+  using: node16
+  main: index.js
