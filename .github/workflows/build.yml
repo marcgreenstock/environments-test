@@ -48,7 +48,7 @@ jobs:
       - id: set-matrix
         run: |
           matrix=$(echo '${{ inputs.regions }}' | sed -r 's/ /\n/g' | jq -Rsc 'split("\n")[:-1]')
-          echo ::set-output name=matrix::$(echo $matrix)\"
+          echo "::set-output name=matrix::$(echo $matrix)"
   push:
     name: Push
     needs: [image, prep-matrix]
