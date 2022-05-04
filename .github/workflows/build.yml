@@ -61,7 +61,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          yarn installl
+          yarn install
       - id: resolve-region
         uses: ./.github/actions/resolve-region
         with:
