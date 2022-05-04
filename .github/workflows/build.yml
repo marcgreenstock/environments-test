@@ -55,7 +55,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        region: ${{ fromJson(needs.prep-matrix.outputs.regions) }}
+        region: ${{ fromJson(needs.prep-matrix.outputs.matrix) }}
     steps:
       - name: Download image artifact
         uses: actions/download-artifact@v2
