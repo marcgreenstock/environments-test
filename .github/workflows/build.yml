@@ -3,9 +3,15 @@ name: Build
 on:
   workflow_call:
     inputs:
+      sha:
+        required: true
+        type: string
       regions:
         required: true
         type: string
+      tag:
+        required: false
+        default: ${{ inputs.sha }}
 
 jobs:
   image:
@@ -13,6 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          sha: ${{ inputs.sha }}
       - name: Docker build
         run: |
           docker build \
@@ -26,19 +34,6 @@ jobs:
         with:
           name: image
           path: /tmp/image.tar
-  # prep-matrix:
-  #   name: Prepare matrix
-  #   runs-on: ubuntu-latest
-  #   outputs:
-  #     matrix: ${{ steps.set-matrix.outputs.regions }}
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - run: |
-  #         yarn install
-  #     - uses: ./.github/actions/region-matrix
-  #       id: set-matrix
-  #       with:
-  #         regions: ${{ inputs.regions }}
   prep-matrix:
     name: Prepare matrix
     runs-on: ubuntu-latest
@@ -60,6 +55,8 @@ jobs:
     environment: ${{ matrix.region }}
     steps:
       - uses: actions/checkout@v2
+        with:
+          sha: ${{ inputs.sha }}
       - run: |
           yarn install
       - id: resolve-region
@@ -79,4 +76,4 @@ jobs:
           docker image ls -a
       - name: Tag image
         run: |
-          echo 'Tagging ${{ steps.resolve-region.outputs.region }}'
+          echo 'Tagging image with ${{ inputs.tag }} at ${{ steps.resolve-region.outputs.region }}'

@@ -7,54 +7,8 @@ on:
 
 jobs:
   build:
-    name: Build
     uses: ./.github/workflows/build.yml
     with:
-      regions: 'env1 env2'
-  # release:
-  #   needs: build
-  #   uses: ./.github/workflows/release.yml
-  # env2:
-  #   needs: build
-  #   uses: ./.github/workflows/release.yml
-  #   with:
-  #     environment: env2
-  #     region: region-2
-  # env3:
-  #   needs: build
-  #   uses: ./.github/workflows/release.yml
-  #   with:
-  #     environment: env3
-  #     region: region-2
-  # env2:
-  #   environment: env2
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: ./.github/workflows/release.yml
-  #       with:
-  #         region: region-2
-  # env3:
-  #   environment: env3
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: ./.github/workflows/release.yml
-  #       with:
-  #         region: region-3
-  # env4:
-  #   environment: env4
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: ./.github/workflows/release.yml
-  #       with:
-  #         region: region-4
-  # env5:
-  #   environment: env5
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: ./.github/workflows/release.yml
-  #       with:
-  #         region: region-5
+      regions: env1 env2
+      sha: ${{ github.sha }}
+  

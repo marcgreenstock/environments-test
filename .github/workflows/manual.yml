@@ -1,0 +1,16 @@
+name: Manual
+
+on:
+  workflow_dispatch:
+    inputs:
+      regions:
+        description: Vercel regions to deploy to
+        required: true
+        defaults: env1      
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+    with:
+      regions: ${{ github.events.inputs.regions }}
+  
