@@ -6,9 +6,10 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-deploy:
+    name: Build and Deploy
     uses: ./.github/workflows/build.yml
     with:
       regions: env1 env2
       sha: ${{ github.sha }}
-  
+      tag: ${{ github.sha }}

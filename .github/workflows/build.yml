@@ -3,10 +3,10 @@ name: Build
 on:
   workflow_call:
     inputs:
-      sha:
+      regions:
         required: true
         type: string
-      regions:
+      sha:
         required: true
         type: string
       tag:
@@ -15,7 +15,7 @@ on:
 
 jobs:
   image:
-    name: Image
+    name: Build Image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -43,10 +43,9 @@ jobs:
       - id: set-matrix
         run: |
           matrix=$(echo '${{ inputs.regions }}' | sed -r 's/ /\n/g' | jq -Rsc 'split("\n")[:-1]')
-          echo $matrix
           echo "::set-output name=matrix::$(echo $matrix)"
   push:
-    name: Push
+    name: Push and Tag
     needs: [image, prep-matrix]
     runs-on: ubuntu-latest
     strategy:

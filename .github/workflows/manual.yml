@@ -15,7 +15,8 @@ on:
         required: false
 
 jobs:
-  build:
+  build-and-deploy:
+    name: Build and Deploy
     uses: ./.github/workflows/build.yml
     with:
       regions: ${{ github.events.inputs.regions }}
