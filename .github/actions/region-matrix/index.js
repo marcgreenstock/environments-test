@@ -16,4 +16,5 @@ const selectedRegions = Object.entries(regionsMap).reduce((result, [key, val]) =
     return result;
   }
 }, []);
-core.setOutput('regions', selectedRegions);
+console.log(selectedRegions);
+core.setOutput('regions', JSON.stringify(selectedRegions));
