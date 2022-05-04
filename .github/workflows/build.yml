@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          sha: ${{ inputs.sha }}
+          ref: ${{ inputs.sha }}
       - name: Docker build
         run: |
           docker build \
@@ -56,7 +56,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          sha: ${{ inputs.sha }}
+          ref: ${{ inputs.sha }}
       - run: |
           yarn install
       - id: resolve-region

@@ -9,7 +9,7 @@ on:
         defaults: env1
       sha:
         description: SHA to deploy
-        required: true      
+        required: true
 
 jobs:
   build:
