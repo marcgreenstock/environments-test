@@ -4,9 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       regions:
-        description: Vercel regions to deploy to
-        required: true
-        defaults: env1      
+        description: Regions to deploy to
+        required: false
+        defaults: env1
+      sha:
+        description: SHA to deploy
+        required: true      
 
 jobs:
   build:
