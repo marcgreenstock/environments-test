@@ -4,16 +4,20 @@ on:
   workflow_dispatch:
     inputs:
       regions:
-        description: Regions to deploy to
-        required: false
+        description: Regions (separated by space)
+        required: true
         defaults: env1
       sha:
         description: SHA to deploy
         required: true
+      tag:
+        description: Override the image tag
+        required: false
 
 jobs:
   build:
     uses: ./.github/workflows/build.yml
     with:
       regions: ${{ github.events.inputs.regions }}
-  
+      sha: ${{ github.events.inputs.sha }}
+      tag: ${{ github.events.inputs.tag }}
