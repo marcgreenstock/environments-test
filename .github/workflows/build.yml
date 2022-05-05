@@ -18,7 +18,7 @@ jobs:
     name: Prepare matrix
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ fromJSON(steps.set-matrix.outputs.matrix) }}
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - id: set-matrix
         run: |
@@ -34,7 +34,7 @@ jobs:
           ref: ${{ inputs.sha }}
       - name: Loop matrix
         run: |
-          for region in "${{ needs.prep-matrix.outputs.matrix }}"
+          for region in "${{ fromJSON(needs.prep-matrix.outputs.matrix) }}"
           do
             echo $region
           done
@@ -58,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        region: ${{ needs.prep-matrix.outputs.matrix }}
+        region: ${{ fromJSON(needs.prep-matrix.outputs.matrix) }}
     environment: ${{ matrix.region }}
     steps:
       - uses: actions/checkout@v2
