@@ -34,7 +34,7 @@ jobs:
           ref: ${{ inputs.sha }}
       - name: Loop matrix
         run: |
-          regions=$(echo "${{ needs.prep-matrix.outputs.matrix }}" jq -r '@sh')
+          regions=$(echo '${{ needs.prep-matrix.outputs.matrix }}' | jq -r '@sh')
           for region in $regions
           do
             echo $region
